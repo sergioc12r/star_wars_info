@@ -6,6 +6,9 @@ class PaginatedResponse<T, K> extends ApiResponse<List<T>>{
   final Pagination? pagination;
   final K? additionalInfo;
 
-  PaginatedResponse({this.pagination, this.additionalInfo, body});
+  PaginatedResponse({this.pagination, this.additionalInfo, body}):
+        super(
+        body:  body,
+      );
 
 }
