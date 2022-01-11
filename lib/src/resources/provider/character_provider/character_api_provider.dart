@@ -34,7 +34,7 @@ class CharacterApiProvider extends CharacterApiService{
 
   Future<ApiResponse<Character>> fetchCharacterDetail({int? charId}) async{
     try {
-      var response = await client.get(Uri.parse('$root/people/$charId?'));
+      var response = await client.get(Uri.parse('$root/character/$charId?'));
       if(response.statusCode != 200) return ApiResponse(statusCode: response.statusCode, success: false);
       var parsedJson = json.decode(response.body);
       return ApiResponse(

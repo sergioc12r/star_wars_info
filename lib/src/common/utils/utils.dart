@@ -11,5 +11,4 @@ class Utils{
 
   static const Environment environment = Environment.production;
 
-  static String urlImageBase = 'https://image.tmdb.org/t/p/w200';
 }

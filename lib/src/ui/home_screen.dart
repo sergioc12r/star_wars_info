@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_info/src/bloc/home_screen/home_screen_bloc.dart';
+import 'package:star_wars_info/src/common/utils/colors.dart';
+import 'package:star_wars_info/src/common/utils/text_styles.dart';
 import 'package:star_wars_info/src/resources/mixins/scroll_mixin.dart';
 import 'package:star_wars_info/src/ui/character_list_tile.dart';
 
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> with ScrollMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('People of Rick and Morty'),centerTitle: true,),
+      appBar: AppBar(title: Text('People of Rick and Morty', style: PrivateTextStyles.baseFont.copyWith(color: PrivateColors.appBarTitle),),centerTitle: true),
       body: BlocBuilder(builder: (_, state) {
         if(state is LoadingHomeScreenState)
           return _loadingWidget();
@@ -51,28 +53,40 @@ class _HomeScreenState extends State<HomeScreen> with ScrollMixin {
         Expanded(child: SizedBox()),
         CupertinoActivityIndicator(),
         SizedBox(width: 10),
-        Text('Loading...',),
+        Text('Loading...',style: PrivateTextStyles.baseFont),
         Expanded(child: SizedBox()),
       ],
     );
   }
 
   Widget _allData(){
-    return RefreshIndicator(
-      onRefresh: ()async => _homeScreenBloc?.add(const LoadDataHomeScreenEvent()),
-      child: CustomScrollView(
-        controller: controller,
-        slivers: [
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) =>
-                 CharacterListTile(character: _homeScreenBloc?.allCharacters?[index]),
-              childCount: _homeScreenBloc?.allCharacters?.length ?? 0,
-            ),
+    return Stack(
+      children: [
+        RefreshIndicator(
+          onRefresh: ()async => _homeScreenBloc?.add(const LoadDataHomeScreenEvent()),
+          child: CustomScrollView(
+            controller: controller,
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) =>
+                     CharacterListTile(character: _homeScreenBloc?.allCharacters?[index]),
+                  childCount: _homeScreenBloc?.allCharacters?.length ?? 0,
+                ),
+              ),
+              SliverToBoxAdapter(child: buildFooter()),
+            ],
           ),
-          SliverToBoxAdapter(child: buildFooter()),
-        ],
-      ),
+        ),
+        Positioned(
+          bottom: 20,
+          right: 20,
+            child: FloatingActionButton(
+                child: const Icon(Icons.keyboard_arrow_up, size: 30,color: PrivateColors.appBarTitle,),
+                onPressed: () => controller?.animateTo(0,
+                    duration: const Duration(seconds: 2),
+                    curve: Curves.ease)))
+      ],
     );
   }
 
