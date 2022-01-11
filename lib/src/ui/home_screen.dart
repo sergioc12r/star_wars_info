@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_info/src/bloc/home_screen/home_screen_bloc.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> with ScrollMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('People of StarWars'),centerTitle: true,),
+      appBar: AppBar(title: Text('People of Rick and Morty'),centerTitle: true,),
       body: BlocBuilder(builder: (_, state) {
         if(state is LoadingHomeScreenState)
           return _loadingWidget();
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> with ScrollMixin {
     return Row(
       children: const [
         Expanded(child: SizedBox()),
-        CircularProgressIndicator(),
+        CupertinoActivityIndicator(),
         SizedBox(width: 10),
         Text('Loading...',),
         Expanded(child: SizedBox()),
@@ -104,9 +105,7 @@ class _HomeScreenState extends State<HomeScreen> with ScrollMixin {
             alignment: Alignment.center,
             child: const AspectRatio(
               aspectRatio: 1,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-              ),
+              child: CupertinoActivityIndicator(),
             ),
           );
         });
