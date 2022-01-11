@@ -1,16 +1,11 @@
-# star_wars_info
+# Rick And Morty Info
 
-A new Flutter project.
+This is a test app that watch a rick and morty's characters and their information. 
 
-## Getting Started
+You can use an android device or web browser
 
-This project is a starting point for a Flutter application.
+The projects name changed to rick and morty because the api (star wars) not provides a good verification (id) for extract the character info with a correct form
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# SERGIO CARO
